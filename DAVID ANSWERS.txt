@@ -1,0 +1,62 @@
+
+--------------------------------------------------------------------------------
+			--QUESTION 1 
+--------------------------------------------------------------------------------
+SELECT		
+			tx.TaxTypeDescription AS [Tax Type Description], 
+			SUM(f.BalanceAmt) AS [Balance Amount],
+			COUNT(DISTINCT f.TaxpayerID) AS [Number Of TaxPayers]
+FROM		[dbo].[fctDebt] f
+			INNER JOIN [dbo].[dimTaxType] tx 
+						ON f.TaxTypeID = tx.TaxTypeID
+
+GROUP BY	tx.TaxTypeDescription
+ORDER BY	SUM(f.BalanceAmt) DESC
+
+
+--------------------------------------------------------------------------------
+			--QUESTION 2
+--------------------------------------------------------------------------------
+SELECT		
+			bu.BusinessUnit,
+			tx.TaxTypeDescription,
+			SUM(f.CapitalAmt) AS CapitalAmt 
+FROM		[dbo].[fctDebt] f
+			INNER JOIN [dbo].[dimTaxType] tx 
+						ON f.TaxTypeID = tx.TaxTypeID
+			INNER JOIN [DBO].[dimBusinessUnit] bu
+						ON f.BusinessUnitID = bu.BusinessUnitID
+WHERE		TX.TaxTypeDescription IN('VAT','PAYE')
+			AND bu.BusinessUnit = 'OPS'
+
+GROUP BY	bu.BusinessUnit,
+			tx.TaxTypeDescription
+
+
+--------------------------------------------------------------------------------
+			--QUESTION 3
+--------------------------------------------------------------------------------
+SELECT		
+			MIN(AG.AgeID) AS AGEID,
+			AG.AgeGroup,
+			AG.AgeYears,
+			SUM(f.InterestAmt) AS InterestAmt
+FROM		[dbo].[fctDebt] f
+			INNER JOIN [dbo].[dimTaxType] tx 
+						ON f.TaxTypeID = tx.TaxTypeID
+			INNER JOIN [DBO].[dimBusinessUnit] bu
+						ON f.BusinessUnitID = bu.BusinessUnitID
+			INNER JOIN dimAge Ag 
+						ON AG.AgeID = F.AgeID
+
+WHERE		TX.TaxTypeDescription IN('INCOME TAX')
+			AND bu.BusinessUnit = '<R50k'
+GROUP BY 
+			AG.AgeGroup,
+			AG.AgeYears
+ORDER BY	MIN(AG.AgeID)
+
+
+--------------------------------------------------------------------------------
+			--END
+--------------------------------------------------------------------------------

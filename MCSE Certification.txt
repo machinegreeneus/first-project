@@ -1,0 +1,16 @@
+MCSA: SQL 2016 BI Development
+>>>Exam 70-767 Implementing a SQL Data Warehouse
+>>>Exam 70-768 Developing SQL Data Models
+
+MCSA: SQL 2016 Database Development
+>>>Exam 70-761 Querying Data with Transact SQL
+>>>Exam 70-762 Developing SQL Databases
+
+MCSA: Machine Learning
+>>>Exam 70-773 Analysing Big Data with Microsoft R
+>>>Exam 70-774 Perform Cloud Data Science with Azure Machine Learning
+
+MCSA: SQL Server 2012/2014
+>>>Exam 70-461 Querying Microsoft SQL Server 2012/14
+>>>Exam 70-462 Administering MS SQL Server 2012/14 Databases
+>>>Exam 70-463 Implementing a Data Warehouse with MS SQL Server 2012/14
